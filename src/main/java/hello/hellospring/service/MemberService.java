@@ -3,10 +3,12 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
@@ -41,7 +43,7 @@ public class MemberService {
     }
 
     /**
-     * 회원 조회
+     * id로 회원 조회
      * @param memberId
      * @return Member
      */
