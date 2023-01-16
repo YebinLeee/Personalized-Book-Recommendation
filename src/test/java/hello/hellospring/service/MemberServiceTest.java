@@ -33,7 +33,6 @@ class MemberServiceTest {
         Member member = new Member();
         member.setName("hello");
 
-
         // when
         Long saveId = memberService.join(member);
 
@@ -60,14 +59,14 @@ class MemberServiceTest {
     }
 
     /**
-     * 전체 회원 반환하기 테스트
+     * 전체 회원 반환 하기 테스트
      */
     @Test
     void findMembers() {
     }
 
     /**
-     * id로 회원 찾기
+     * id로 회원 찾기 테스트
      */
     @Test
     void findOne() {
