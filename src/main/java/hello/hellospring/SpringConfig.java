@@ -30,6 +30,7 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository(){
+        System.out.println("datasource에서 데이터를 가져옵니다 : " + dataSource);
         // return new MemoryMemberRepository();
         return new JdbcMemberRepository(dataSource);
     }

@@ -26,7 +26,6 @@ public class JdbcMemberRepository implements MemberRepository{
             conn = getConnection();
             pstmt = conn.prepareStatement(sql,
                     Statement.RETURN_GENERATED_KEYS);
-
             pstmt.setString(1, member.getName());
 
             pstmt.executeUpdate();
@@ -37,13 +36,13 @@ public class JdbcMemberRepository implements MemberRepository{
             } else {
                 throw new SQLException("id 조회 실패");
             }
+
             return member;
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {
             close(conn, pstmt, rs);
         }
-
     }
 
     @Override
@@ -87,8 +86,8 @@ public class JdbcMemberRepository implements MemberRepository{
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
-
             rs = pstmt.executeQuery();
+
             List<Member> members = new ArrayList<>();
             while(rs.next()) {
                 Member member = new Member();
