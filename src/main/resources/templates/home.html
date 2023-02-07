@@ -3,14 +3,30 @@
 
 <div class="container">
   <div>
-    <h1>Hello Spring</h1>
-    <p>회원 기능</p>
-    <p>
-      <a href="/members/new">회원 가입</a>
-      <a href="/members">회원 목록</a>
-      <a href="/book/new">도서 추천 받으러 가기</a>
-      <a href="/book">회원 정보 목록 보기</a>
-    </p>
+    <h1>예빈의 책 공방 </h1>
+    <h3>회원 기능</h3>
+    <ul>
+      <li><a href="/members/new">회원 가입</a></li>
+      <li><a href="/members">회원 목록</a></li>
+    </ul>
+
+    <h3>도서 추천 기능</h3>
+    <ul>
+      <li><a href="/book">회원 정보 목록 보기</a></li>
+      <li><a href="/book/new">도서 추천 받으러 가기</a></li>
+    </ul>
+    <div>
+      <h3>도서 검색 기능</h3>
+      <form action="/book/search" method="post">
+      <div class="form-group">
+        <div id="book-search-form">
+          <label for="query">키워드 입력: </label>
+          <input type="text" size=50 id="query" name="query" placeholder="검색하고 싶은 도서 키워드를 입력하세요">
+          <button type="submit">완료</button>
+        </div>
+      </div>
+      </form>
+
   </div>
 </div> <!-- /container -->
 

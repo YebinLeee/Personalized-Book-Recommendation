@@ -3,12 +3,10 @@ package hello.hellospring.service;
 import hello.hellospring.domain.MemberInfo;
 import hello.hellospring.repository.MemberInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 public class MemberInfoService {
     private final MemberInfoRepository memberInfoRepository;
 

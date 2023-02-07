@@ -1,74 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <div class="container">
     <div>
-        <form action="/book/new" method="post">
-            <div class="form-group">
-                <div id="name-form">
-                    <label for="name">이름</label>
-                    <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
-                </div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+                <th>관심사</th>
+                <th>기분</th>
+                <th>생성날짜</th>
+            </tr>
 
-                <div id="age-form">
-                    <label for="age">나이</label>
-                    <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
-                </div>
-
-                <div id="gender-form">
-                    <label for="gender">성별</label>
-                    <select id="gender" name="gender">
-                        <option value="남">남</option>
-                        <option value="여">여</option>
-                        <option value="선택 안함">선택 안함</option>
-                    </select>
-                </div>
-
-                <div id="interest-form">
-                    <label for="interest">관심사</label>
-                    <select id="interest" name="interest">
-                        <option value="자기계발">자기계발</option>
-                        <option value="취미">취미</option>
-                        <option value="여행">여행</option>
-                        <option value="요리">요리</option>
-                        <option value="취업">취업</option>
-                        <option value="직장">직장</option>
-                        <option value="수험생">수험생</option>
-                        <option value="외국어">외국어</option>
-                        <option value="종교">종교</option>
-                        <option value="스포츠">스포츠</option>
-                        <option value="IT">IT</option>
-                        <option value="자연">자연</option>
-                        <option value="예술">예술</option>
-                        <option value="사회">사회</option>
-                        <option value="과학">과학</option>
-                    </select>
-                </div>
-
-                <div id="feeling-form">
-                    <label for="feeling">기분</label>
-                    <select id="feeling" name="feeling">
-                        <option value="기쁨">기쁨</option>
-                        <option value="즐거움">즐거움</option>
-                        <option value="편안함">편안함</option>
-                        <option value="도전적임">도전적임</option>
-                        <option value="감사함">감사함</option>
-                        <option value="만족스러움">만족스러움</option>
-                        <option value="슬픔">슬픔</option>
-                        <option value="두려움">두려움</option>
-                        <option value="우울함">우울함</option>
-                        <option value="분노">분노</option>
-                        <option value="불안함">불안함</option>
-                        <option value="후회">후회</option>
-                    </select>
-                </div>
-
-            </div>
-            <button type="submit">완료</button>
-        </form>
+            </thead>
+            <tbody>
+            <tr th:each="memberInfo : ${memberInfos}">
+                <td th:text="${memberInfo.id}"></td>
+                <td th:text="${memberInfo.name}"></td>
+                <td th:text="${memberInfo.age}"></td>
+                <td th:text="${memberInfo.gender}"></td>
+                <td th:text="${memberInfo.interest}"></td>
+                <td th:text="${memberInfo.feeling}"></td>
+                <td th:text="${memberInfo.createdDate}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div> <!-- /container -->
 
 </body>
 </html>
+
