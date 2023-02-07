@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="container">
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>성별</th>
+        <th>관심사</th>
+        <th>기분</th>
+        <th>생성날짜</th>
+      </tr>
+
+      </thead>
+      <tbody>
+      <tr th:each="memberInfo : ${memberInfos}">
+        <td th:text="${memberInfo.id}"></td>
+        <td th:text="${memberInfo.name}"></td>
+        <td th:text="${memberInfo.age}"></td>
+        <td th:text="${memberInfo.gender}"></td>
+        <td th:text="${memberInfo.interest}"></td>
+        <td th:text="${memberInfo.feeling}"></td>
+        <td th:text="${memberInfo.createdDate}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+
+</body>
+</html>
+
