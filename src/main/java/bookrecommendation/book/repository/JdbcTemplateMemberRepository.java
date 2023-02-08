@@ -1,6 +1,6 @@
-package hello.hellospring.repository;
+package bookrecommendation.book.repository;
 
-import hello.hellospring.domain.Member;
+import bookrecommendation.book.domain.Member;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -41,6 +41,19 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
         List<Member> result = jdbcTemplate.query("select * from member where name = ?", memberRowMapper(), name);
         return result.stream().findAny();
     }
+
+    @Override
+    public Optional<Member> findByRfid(String rfid) {
+        List<Member> result = jdbcTemplate.query("select * from member where name = ?", memberRowMapper(), rfid);
+        return result.stream().findAny();
+    }
+
+    @Override
+    public Optional<Member> findByBarcode(String barcode) {
+        List<Member> result = jdbcTemplate.query("select * from member where name = ?", memberRowMapper(), barcode);
+        return result.stream().findAny();
+    }
+
 
     @Override
     public List<Member> findAll() {

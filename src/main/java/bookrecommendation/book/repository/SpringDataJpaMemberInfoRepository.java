@@ -1,6 +1,6 @@
-package hello.hellospring.repository;
+package bookrecommendation.book.repository;
 
-import hello.hellospring.domain.MemberInfo;
+import bookrecommendation.book.domain.MemberInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

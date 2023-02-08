@@ -1,4 +1,4 @@
-package hello.hellospring.controller;
+package bookrecommendation.book.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
-    @GetMapping("hello")
+    @GetMapping("bookrecommendation")
     public String hello(Model model){
         model.addAttribute("data", "hello!!");
-        return "hello";
+        return "bookrecommendation";
     }
 
     @GetMapping("hello-mvc")
@@ -24,7 +24,7 @@ public class HelloController {
     @GetMapping("hello-string")
     @ResponseBody
     public String helloString(@RequestParam("name") String name){
-        return "hello" + name;
+        return "bookrecommendation" + name;
     }
 
     @GetMapping("hello-api")

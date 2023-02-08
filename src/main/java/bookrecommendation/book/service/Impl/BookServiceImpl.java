@@ -1,5 +1,6 @@
 package bookrecommendation.book.service.Impl;
 
+import bookrecommendation.book.domain.Feeling;
 import bookrecommendation.book.domain.Gender;
 import bookrecommendation.book.domain.Interest;
 import bookrecommendation.book.dto.BookDto;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static bookrecommendation.book.openapi.constant.ApiUrlConstant.*;
 
@@ -50,9 +52,9 @@ public class BookServiceImpl implements BookService {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
 
-        Interest interest  = Interest.valueOf(interestValue);
+        Interest interest  = Interest.valueOfDescription(interestValue);
         int categoryId = 0;
-        switch (interest) {
+        switch (Objects.requireNonNull(interest)) {
             case SELF_IMPROVEMENT -> categoryId = 336;
             case HOBBY -> categoryId = 558890;
             case TRAVEL -> categoryId = 51377;
@@ -141,14 +143,16 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public List<BookDto> searchByFeeling(String feeling) {
+    public List<BookDto> searchByFeeling(String feelingValue) {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
 
-        switch (feeling) {
-            case "슬픔", "두려움", "우울함", "분노", "불안함", "후회" -> params.setCategoryId(51375);
-            default -> params.setCategoryId(50940);
-        }
+        Feeling feeling = Feeling.valueOfString(feelingValue);
+
+        params.setCategoryId(switch (Objects.requireNonNull(feeling)) {
+            case SADNESS, FEAR, DEPRESSED, ANGER, ANXIETY, REGRET -> 51375;
+            default -> 50940;
+        });
 
         paramSetter.setRequestUrl(AlADIN_ITEM_LIST_API_URL);
 

@@ -1,6 +1,6 @@
-package hello.hellospring.repository;
+package bookrecommendation.book.repository;
 
-import hello.hellospring.domain.Member;
+import bookrecommendation.book.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
