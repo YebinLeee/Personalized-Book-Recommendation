@@ -11,7 +11,7 @@ import java.util.List;
 @Transactional
 public class AladinBookSearchTest {
     @Test
-    void 자바_쿼리로_책검색하기h(){
+    void 자바_쿼리로_책검색하기(){
         BookSearchService bookSearchService = new BookSearchService();
         BookSearchQuery query = new BookSearchQuery();
         query.setQuery("java");
