@@ -1,4 +1,4 @@
-package hello.hellospring.controller;
+package hello.hellospring.book.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +12,8 @@ public class BookSearchedResult {
     private String author;
     private String pubDate;
     private String isbn;
-    private String categoryId;
+    private Long categoryId;
     private String categoryName;
     private String publisher;
-    private String priceSales;
-
+    private Long priceSales;
 }

@@ -1,4 +1,4 @@
-package hello.hellospring.controller;
+package hello.hellospring.book.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +20,6 @@ public class BookSearchQueryParams {
         this.maxResults = 5;
         this.sort = "SalesPoint";
         this.coverSize = "Big";
-        this.output = "xml";
+        this.output = "js";
     }
 }

@@ -1,4 +1,4 @@
-package hello.hellospring.controller;
+package hello.hellospring.book.form;
 
 import lombok.Getter;
 import lombok.Setter;

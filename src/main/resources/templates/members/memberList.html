@@ -12,12 +12,16 @@
         </tr>
       </thead>
       <tbody>
+      <tr th:if="${response=='NoData'}">
+        <td> 회원 정보가 없습니다. </td>
+      </tr>
       <tr th:each="member : ${members}">
-        <td th:text="${member.id}"></td>
-        <td th:text="${member.name}"></td>
+        <td> <span th:text="${member.id}"> Id </span></td>
+        <td> <span th:text="${member.name}"> Name </span></td>
       </tr>
       </tbody>
     </table>
+    <a href="/"> 홈으로 돌아가기 </a>
   </div>
 </div> <!-- /container -->
 

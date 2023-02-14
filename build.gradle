@@ -8,6 +8,13 @@ group = 'hello'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+// lombok 설정 추가
+configurations{
+	compileOnly{
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -22,10 +29,10 @@ dependencies {
 	// library
 	implementation 'org.jsoup:jsoup:1.13.1'
 	implementation 'com.google.code.gson:gson:2.8.6'
-	implementation 'org.json:json:20210112'
+	implementation 'org.json:json:20211205'
 	implementation 'org.apache.httpcomponents:httpclient:4.3.6'
 	implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
-
+	implementation 'org.jdom:jdom2:2.0.6'
 
 	// lombok 설정 추가
 	compileOnly 'org.projectlombok:lombok'
