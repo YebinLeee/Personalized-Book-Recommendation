@@ -8,24 +8,28 @@
 <h2>Book Search Result</h2>
 <table>
   <thead>
-    <tr>
-      <th>Title</th>
+    <tr style="background-color:lightgray">
+      <th width="400px">Title</th>
+      <th>Cover Image</th>
       <th>Author</th>
       <th>Publisher</th>
       <th>Publish Date</th>
       <th>ISBN</th>
       <th>Price</th>
       <th>Category Id</th>
-      <th>Category Number</th>
+      <th width="300px">Category Number</th>
       <th>Link</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="text-align:center">
     <tr th:if="${response=='NoData'}">
       <td> 해당 쿼리에 부합하는 도서 결과가 없습니다. 다시 올바르게 검색해주세요. </td>
     </tr>
     <tr th:each="result : ${results}">
-      <td> <span th:text="${result.title}"> Title </span></td>
+      <td> <span style="font-weight:bold" th:text="${result.title}"> Title </span></td>
+      <td>
+        <img th:src="@{${result.coverLink}}" alt="no image"/>
+      </td>
       <td> <span th:text="${result.author}"> Author </span></td>
       <td> <span th:text="${result.publisher}"> Publisher </span></td>
       <td> <span th:text="${result.pubDate}"> Published Date </span></td>

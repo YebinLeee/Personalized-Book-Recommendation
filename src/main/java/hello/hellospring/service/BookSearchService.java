@@ -59,7 +59,7 @@ public class BookSearchService {
             result.setCategoryName(item.getString("categoryName"));
             result.setPublisher(item.getString("publisher"));
             result.setPriceSales(item.getLong("priceSales"));
-
+            result.setCoverLink(item.getString("cover"));
             results.add(result);
         }
 

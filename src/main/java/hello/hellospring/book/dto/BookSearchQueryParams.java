@@ -17,9 +17,9 @@ public class BookSearchQueryParams {
 
     public BookSearchQueryParams(){
         this.key = "ttbyebin2lee1424001";
-        this.maxResults = 5;
+        this.maxResults = 10;
         this.sort = "SalesPoint";
-        this.coverSize = "Big";
+        this.coverSize = "Mid";
         this.output = "js";
     }
 }

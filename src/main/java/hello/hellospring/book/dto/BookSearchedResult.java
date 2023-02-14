@@ -16,4 +16,5 @@ public class BookSearchedResult {
     private String categoryName;
     private String publisher;
     private Long priceSales;
+    private String coverLink;
 }
