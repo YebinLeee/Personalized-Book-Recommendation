@@ -1,16 +1,22 @@
 package hello.hellospring.controller;
 
+import hello.hellospring.book.dto.BookSearchQuery;
+import hello.hellospring.book.dto.BookSearchedResult;
+import hello.hellospring.book.form.BookRecomForm;
 import hello.hellospring.domain.MemberInfo;
 import hello.hellospring.service.BookSearchService;
 import hello.hellospring.service.MemberInfoService;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
 
+@Transactional
 @Controller
 public class BookController {
 
@@ -39,7 +45,7 @@ public class BookController {
         memberInfo.setFeeling(form.getFeeling());
 
         memberInfoService.join(memberInfo);
-        return "redirect:/"; // 홈 화면 으로 redirect
+        return "redirect:/";
     }
 
     @GetMapping("/book")
@@ -49,21 +55,11 @@ public class BookController {
         return "book/memberInfoList";
     }
 
-    @PostMapping("/book/search")
-    public String searchBooks(BookSearchQuery query) throws ParserConfigurationException {
-        String result = bookSearchService.searchResultByXml(query).toString();
-        System.out.println("result = " + result);
-        return result;
-    }
 
-    /*
-    @GetMapping("/book/result")
-    public String showResult(Model model, @ModelAttribute BookSearchQuery query) {
-        String jsonResult = bookSearchService.searchBooks(query).toString();
-        BookSearchedResult result = bookSearchService.parseResult(jsonResult);
-        model.addAttribute("result", result);
-        return "book-result";
+    @RequestMapping(value = "/book/result", method = RequestMethod.GET)
+    public String showResult(Model model, BookSearchQuery query) {
+        List<BookSearchedResult> results = bookSearchService.searchBooks(query);
+        model.addAttribute("results", results);
+        return "book/result";
     }
-
-     */
 }

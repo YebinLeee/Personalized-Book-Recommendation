@@ -9,16 +9,17 @@ import hello.hellospring.service.BookSearchService;
 import hello.hellospring.service.MemberInfoService;
 import hello.hellospring.service.MemberService;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class SpringConfig {
 
+    @PersistenceContext
     private final EntityManager em;
     private final DataSource dataSource;
 
@@ -53,11 +54,7 @@ public class SpringConfig {
 
     @Bean
     public BookSearchService bookSearchService(){
-        return new BookSearchService(restTemplate());
-    }
-
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+        return new BookSearchService();
     }
 
     public TimeTraceAop timeTraceAop(){

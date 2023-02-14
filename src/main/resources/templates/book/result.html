@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Search Result</title>
+</head>
+<body>
+<h2>Book Search Result</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Publisher</th>
+      <th>Publish Date</th>
+      <th>ISBN</th>
+      <th>Price</th>
+      <th>Category Id</th>
+      <th>Category Number</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:if="${response=='NoData'}">
+      <td> 해당 쿼리에 부합하는 도서 결과가 없습니다. 다시 올바르게 검색해주세요. </td>
+    </tr>
+    <tr th:each="result : ${results}">
+      <td> <span th:text="${result.title}"> Title </span></td>
+      <td> <span th:text="${result.author}"> Author </span></td>
+      <td> <span th:text="${result.publisher}"> Publisher </span></td>
+      <td> <span th:text="${result.pubDate}"> Published Date </span></td>
+      <td> <span th:text="${result.isbn}"> ISBN Number </span></td>
+      <td> <span th:text="${result.priceSales}"> Price Sales </span></td>
+      <td> <span th:text="${result.categoryId}"> Category ID </span></td>
+      <td> <span th:text="${result.categoryName}"> Category Name </span></td>
+      <td> <a th:href="${result.link}"> Book Info </a></td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
