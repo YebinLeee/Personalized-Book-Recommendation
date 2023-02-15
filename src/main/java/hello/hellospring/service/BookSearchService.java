@@ -15,26 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookSearchService {
+    private static String itemListUrl = "http://www.aladin.co.kr/ttb/api/ItemList.aspx";
+    private static String itemSearchUrl = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx";
 
     @Autowired
     public BookSearchService() {
     }
 
+
     public List<BookSearchedResult> searchBooks(BookSearchQuery query) {
         BookSearchQueryParams params = new BookSearchQueryParams();
         params.setQuery(query.getQuery());
 
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl("http://www.aladin.co.kr/ttb/api/ItemSearch.aspx")
-                .queryParam("ttbkey", params.getKey())
-                .queryParam("query", params.getQuery())
-                .queryParam("maxResults", params.getMaxResults())
-                .queryParam("sort", params.getSort())
-                .queryParam("cover", params.getCoverSize())
-                .queryParam("output", params.getOutput());
+        String requestUrl = setParameters(itemSearchUrl, params);
+        Connection connection = Jsoup.connect(requestUrl);
 
-
-        String url = uriComponentsBuilder.toUriString();
-        Connection connection = Jsoup.connect(url);
         String response;
         try {
             response = connection.ignoreContentType(true).execute().body();
@@ -42,10 +37,39 @@ public class BookSearchService {
             throw new RuntimeException(e);
         }
 
-        JSONObject json = new JSONObject(response);
-        JSONArray items = json.getJSONArray("item");
-        ArrayList<BookSearchedResult> results = new ArrayList<>();
+        return getBookResults(new JSONObject(response));
+    }
 
+    private String setParameters(String requestUrl, BookSearchQueryParams params){
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(requestUrl)
+                .queryParam("ttbkey", params.getKey())
+                .queryParam("maxResults", params.getMaxResults())
+                .queryParam("sort", params.getSort())
+                .queryParam("cover", params.getCoverSize())
+                .queryParam("output", params.getOutput())
+                .queryParam("categoryId", params.getCategoryId())
+                .queryParam("version", params.getVersion());
+
+        if (requestUrl.equals(itemSearchUrl)){
+            uriComponentsBuilder.queryParam("query", params.getQuery());
+        }
+        else if (requestUrl.equals(itemListUrl)){
+            uriComponentsBuilder.queryParam("queryType", params.getQueryType());
+        }
+
+        System.out.println("requestUrl = " + requestUrl);
+
+        String url = uriComponentsBuilder.toUriString();
+        System.out.println("url = " + url);
+
+        return url;
+    }
+
+    public List<BookSearchedResult> getBookResults(JSONObject jsonObject){
+        List<BookSearchedResult> results = new ArrayList<>();
+        System.out.println("jsonObject = " + jsonObject);
+
+        JSONArray items = jsonObject.getJSONArray("item");
         for (int i = 0; i < items.length(); i++) {
             BookSearchedResult result = new BookSearchedResult();
 
@@ -62,7 +86,6 @@ public class BookSearchService {
             result.setCoverLink(item.getString("cover"));
             results.add(result);
         }
-
         return results;
     }
 }
