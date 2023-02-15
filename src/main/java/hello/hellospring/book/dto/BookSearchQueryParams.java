@@ -10,16 +10,21 @@ import lombok.ToString;
 public class BookSearchQueryParams {
     private String key;
     private String query;
+    private String queryType;
     private int maxResults;
     private String sort;
     private String coverSize;
     private String output;
+    private int categoryId;
+    private int version;
 
     public BookSearchQueryParams(){
-        this.key = "ttbyebin2lee1424001";
-        this.maxResults = 10;
-        this.sort = "SalesPoint";
-        this.coverSize = "Mid";
-        this.output = "js";
+        setKey("ttbyebin2lee1424001");
+        setMaxResults(10);
+        setSort("SalesPoint");
+        setCoverSize("Mid");
+        setOutput("js");
+        setQueryType("BestSeller");
+        setVersion(20131101);
     }
 }

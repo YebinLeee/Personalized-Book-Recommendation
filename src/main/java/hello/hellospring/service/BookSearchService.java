@@ -15,19 +15,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookSearchService {
-    private static String itemListUrl = "http://www.aladin.co.kr/ttb/api/ItemList.aspx";
-    private static String itemSearchUrl = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx";
+    private static final String itemListUrl = "http://www.aladin.co.kr/ttb/api/ItemList.aspx";
+    private static final String itemSearchUrl = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx";
 
     @Autowired
     public BookSearchService() {
     }
 
-
-    public List<BookSearchedResult> searchBooks(BookSearchQuery query) {
+    public List<BookSearchedResult> searchBooksByQuery(BookSearchQuery query) {
         BookSearchQueryParams params = new BookSearchQueryParams();
         params.setQuery(query.getQuery());
 
         String requestUrl = setParameters(itemSearchUrl, params);
+        Connection connection = Jsoup.connect(requestUrl);
+
+        String response;
+        try {
+            response = connection.ignoreContentType(true).execute().body();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return getBookResults(new JSONObject(response));
+    }
+
+    public List<BookSearchedResult> searchBooksByCategory(String interest){
+        int categoryId = 0;
+
+        switch (interest) {
+            case "자기계발" -> categoryId = 336;
+            case "취미" -> categoryId = 558890;
+            case "여행" -> categoryId = 51377;
+            case "요리" -> categoryId = 53471;
+            case "취업" -> categoryId = 249;
+            case "직장" -> categoryId = 2172;
+            case "수험생" -> categoryId = 1383;
+            case "외국어" -> categoryId = 1322;
+            case "종교" -> categoryId = 17436;
+            case "IT" -> categoryId = 8537;
+            case "자연" -> categoryId = 8097;
+            case "예술" -> categoryId = 518;
+            case "사회" -> categoryId = 51306;
+            case "과학" -> categoryId = 887;
+            default -> {
+            }
+        }
+
+        BookSearchQueryParams params = new BookSearchQueryParams();
+        params.setCategoryId(categoryId);
+
+        String requestUrl = setParameters(itemListUrl, params);
         Connection connection = Jsoup.connect(requestUrl);
 
         String response;
@@ -57,19 +94,13 @@ public class BookSearchService {
             uriComponentsBuilder.queryParam("queryType", params.getQueryType());
         }
 
-        System.out.println("requestUrl = " + requestUrl);
-
-        String url = uriComponentsBuilder.toUriString();
-        System.out.println("url = " + url);
-
-        return url;
+        return uriComponentsBuilder.toUriString();
     }
 
     public List<BookSearchedResult> getBookResults(JSONObject jsonObject){
         List<BookSearchedResult> results = new ArrayList<>();
-        System.out.println("jsonObject = " + jsonObject);
-
         JSONArray items = jsonObject.getJSONArray("item");
+
         for (int i = 0; i < items.length(); i++) {
             BookSearchedResult result = new BookSearchedResult();
 

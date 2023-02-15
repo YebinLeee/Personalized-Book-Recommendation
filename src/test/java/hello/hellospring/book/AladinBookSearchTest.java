@@ -16,7 +16,7 @@ public class AladinBookSearchTest {
         BookSearchQuery query = new BookSearchQuery();
         query.setQuery("java");
 
-        List<BookSearchedResult> bookSearchedResults = bookSearchService.searchBooks(query);
+        List<BookSearchedResult> bookSearchedResults = bookSearchService.searchBooksByQuery(query);
         for (BookSearchedResult bookSearchedResult : bookSearchedResults) {
             System.out.println("title = " + bookSearchedResult.getTitle());
             System.out.println("author = " + bookSearchedResult.getAuthor());
