@@ -4,29 +4,41 @@
 
 <div class="container">
   <div>
+    <h2>회원 가입을 진행합니다.</h2>
     <form action="/members/new" method="POST">
       <div class="form-group">
-        <label for="name">이름</label>
-        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+        <div id="name-form">
+          <label for="name">이름</label>
+          <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+        </div>
 
-        <label for="password">비밀 번호</label>
-        <input type="password" id="password" name="password" placeholder="비밀 번호를 입력하세요">
+        <div id="password-form">
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+        </div>
 
-        <label for="rfid">RFID</label>
-        <input type="text" id="rfid" name="rfid" placeholder="rifd 번호를 입력하세요">
+        <div id="rfid-form">
+          <label for="rfid">RFID</label>
+          <input type="text" id="rfid" name="rfid" placeholder="rifd 번호를 입력하세요">
+        </div>
 
-        <label for="barcode">Barcode</label>
-        <input type="text" id="barcode" name="barcode" placeholder="barcode 번호를 입력하세요">
+        <div id="barcode-form">
+          <label for="barcode">Barcode</label>
+          <input type="text" id="barcode" name="barcode" placeholder="barcode 번호를 입력하세요">
+        </div>
 
-        <label for="age">나이</label>
-        <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
+        <div id="age-form">
+          <label for="age">나이</label>
+          <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
+        </div>
 
-        <label for="gender">성별</label>
-        <select id="gender" name="gender">
-          <option value="male">남자</option>
-          <option value="female">여자</option>
-        </select>
-
+        <div id="gender-form">
+          <label for="gender">성별</label>
+          <select id="gender" name="gender">
+            <option value="male">남자</option>
+            <option value="female">여자</option>
+          </select>
+        </div>
       </div>
       <button type="submit">등록</button>
     </form>

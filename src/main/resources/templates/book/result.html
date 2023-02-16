@@ -6,6 +6,14 @@
 </head>
 <body>
 <h2>Book Search Result</h2>
+<p><a href="/">홈으로 돌아가기</a></p>
+<h3> <span th:text="${member.name}"></span>님에게 추천하는 도서들입니다.</h3>
+  <ul>
+    <li> 나이 : <span th:text="${member.age}"></span></li>
+    <li> 성별 : <span th:text="${member.gender}"></span></li>
+    <li> 관심사 : <span th:text="${member.interest}"></span></li>
+    <li> 기분 : <span th:text="${member.feeling}"></span></li>
+  </ul>
 <table>
   <thead>
     <tr style="background-color:lightgray">
