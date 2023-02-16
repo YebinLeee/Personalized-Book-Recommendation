@@ -5,7 +5,7 @@
 <div class="container">
   <div>
     <h2>RFID 또는 Barcode로 회원 인증을 해주세요.</h2>
-    <form action="/members/confirm" method="POST">
+    <form action="/members/confirm" method="POST" onsubmit="return beforeSubmit()">
       <label for="rfid">RFID : </label>
       <input id="rfid" name="rfid" placeholder="rfid를 입력해주세요" type="password">
       <label for="barcode">바코드 : </label>
@@ -24,6 +24,18 @@
         }else {
         }
     })
+
+    function beforeSubmit(){
+      var rfid = document.getElementById('rfid').value;
+      var barcode = document.getElementById('barcode').value;
+      if(!rfid && !barcode){
+          alert("rfid 또는 barcode 중 하나를 입력해주세요.");
+          return false;
+      }
+      else{
+          return true;
+      }
+  }
 </script>
 </body>
 </html>

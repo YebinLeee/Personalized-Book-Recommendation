@@ -5,7 +5,7 @@
 <div class="container">
   <div>
     <h2>회원 가입을 진행합니다.</h2>
-    <form action="/members/new" method="POST">
+    <form action="/members/new" method="POST" onsubmit="return beforeSubmit()">
       <div class="form-group">
         <div id="name-form">
           <label for="name">이름</label>
@@ -44,6 +44,24 @@
     </form>
   </div>
 </div> <!-- /container -->
+
+<script>
+    function beforeSubmit(){
+        var name = document.getElementById('name').value;
+        var age = document.getElementById('age').value;
+        var password = document.getElementById('password').value;
+        var barcode = document.getElementById('barcode').value;
+        var rfid = document.getElementById('rfid').value;
+
+        if(!name || !age || !password || !barcode || !rfid){
+            alert("정보를 정확히 입력해주세요");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+</script>
 
 </body>
 </html>
