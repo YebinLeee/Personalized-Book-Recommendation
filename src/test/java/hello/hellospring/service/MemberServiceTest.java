@@ -2,10 +2,14 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Gender;
 import hello.hellospring.domain.Member;
+import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,6 +20,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MemberServiceTest {
    @Autowired MemberService memberService;
 
+   @BeforeEach
+   void beforeEach(){
+       Member member = new Member();
+
+       member.setName("springer");
+       member.setPassword("1234");
+       member.setAge(24);
+       member.setGender(Gender.FEMALE);
+       member.setRfid("1234");
+
+       memberService.join(member);
+   }
     /**
      * 회원 가입 테스트
      */
@@ -59,17 +75,25 @@ class MemberServiceTest {
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
     }
 
-    /**
-     * 전체 회원 반환 하기 테스트
-     */
+
     @Test
-    void findMembers() {
+    void 회원가입시_이름_없는_경우(){
+        Member member = new Member();
+
+        member.setAge(24);
+        member.setGender(Gender.MALE);
+        member.setPassword("1234");
+
+        assertThrows(PersistenceException.class, ()-> memberService.join(member));
     }
 
-    /**
-     * id로 회원 찾기 테스트
-     */
     @Test
-    void findOne() {
+    void 회원_임시로그인_성공(){
+        assertThat(memberService.validateByRfid("1234").get()).isInstanceOf(Member.class);
+    }
+
+    @Test
+    void 회원_임시로그인_실페_RFID가다른경우(){
+        assertThrows(NoSuchElementException.class, () -> memberService.validateByRfid("12345").get());
     }
 }

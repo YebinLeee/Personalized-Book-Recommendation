@@ -19,16 +19,16 @@ public class Member {
     @Column(name = "BARCODE_NUMBER")
     private String barcode;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String name;
 
-    @Column(name = "age")
+    @Column(name = "age", nullable = false)
     private int age;
 
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 }
