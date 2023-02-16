@@ -52,8 +52,9 @@ public class BookSearchService {
             case "수험생" -> categoryId = 1383;
             case "외국어" -> categoryId = 1322;
             case "종교" -> categoryId = 17436;
+            case "스포츠" -> categoryId = 8097;
             case "IT" -> categoryId = 8537;
-            case "자연" -> categoryId = 8097;
+            case "자연" -> categoryId = 8260;
             case "예술" -> categoryId = 518;
             case "사회" -> categoryId = 51306;
             case "과학" -> categoryId = 887;

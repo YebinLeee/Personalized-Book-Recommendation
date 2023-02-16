@@ -14,19 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
-
 @Configuration
 public class SpringConfig {
 
     @PersistenceContext
     private final EntityManager em;
-    private final DataSource dataSource;
 
     @Autowired
-    public SpringConfig(EntityManager em, DataSource dataSource) {
+    public SpringConfig(EntityManager em) {
         this.em = em;
-        this.dataSource = dataSource;
     }
 
     @Bean

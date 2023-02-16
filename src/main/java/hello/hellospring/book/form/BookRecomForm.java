@@ -6,7 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class BookRecomForm {
     private String name;
     private int age;
