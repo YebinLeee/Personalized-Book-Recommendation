@@ -1,6 +1,8 @@
 package hello.hellospring.controller;
 
+import hello.hellospring.book.form.MemberConfirmForm;
 import hello.hellospring.book.form.MemberForm;
+import hello.hellospring.domain.Gender;
 import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Controller
@@ -30,7 +33,19 @@ public class MemberController {
     @PostMapping("/members/new")
     public String create(MemberForm form){
         Member member = new Member();
+
         member.setName(form.getName());
+        member.setPassword(form.getPassword());
+        member.setRfid(form.getRfid());
+        member.setBarcode(form.getBarcode());
+        member.setAge(form.getAge());
+
+        if(form.getGender().equals("male")){
+            member.setGender(Gender.MALE);
+        }
+        else{
+            member.setGender(Gender.FEMALE);
+        }
 
         memberService.join(member);
         return "redirect:/"; // 홈 화면 으로 redirect
@@ -41,5 +56,32 @@ public class MemberController {
         List<Member> members = memberService.findMembers();
         model.addAttribute("members",members);
         return "members/memberList";
+    }
+
+    @GetMapping("/members/confirm")
+    public String login(){
+        return "members/memberConfirmForm";
+    }
+
+    @PostMapping("/members/confirm")
+    public String confirm(MemberConfirmForm confirmForm, Model model){
+        String rfid = confirmForm.getRfid();
+        String barcode = confirmForm.getBarcode();
+
+        Optional<Member> getMember1 = memberService.validateByRfid(rfid);
+        Optional<Member> getMember2 = memberService.validateByBarcode(barcode);
+
+        if(getMember1.isPresent()){
+            model.addAttribute("member", getMember1.get());
+            return "members/welcome";
+        }
+        else if(getMember2.isPresent()){
+            model.addAttribute("member", getMember2.get());
+            return "members/welcome";
+        }
+        else{
+            model.addAttribute("msg", "회원 인증을 다시 시도해주세요!");
+            return "members/memberConfirmForm";
+        }
     }
 }

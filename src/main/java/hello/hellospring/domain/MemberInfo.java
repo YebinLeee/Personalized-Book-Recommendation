@@ -35,14 +35,6 @@ public class MemberInfo{
     @CreatedDate
     private LocalDateTime createdDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public MemberInfo(){
         this.createdDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
