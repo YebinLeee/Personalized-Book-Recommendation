@@ -1,44 +1,45 @@
 package hello.hellospring.service;
 
+import hello.hellospring.domain.Gender;
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
+@SpringBootTest
+@Transactional
 class MemberServiceTest {
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-
-    @BeforeEach
-    public void beforeEach(){
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-    @AfterEach
-    public void clear(){
-        memberRepository.clearStore();
-    }
+   @Autowired MemberService memberService;
 
     /**
      * 회원 가입 테스트
      */
     @Test
-    void 회원가입() { // 테스트 메서드 이름은 한글로 작성
+    void 회원가입() {
         // given
         Member member = new Member();
         member.setName("hello");
+        member.setPassword("0000");
+        member.setAge(20);
+        member.setRfid("E00401082F29A99D");
+        member.setBarcode("EM0000069110");
+        member.setGender(Gender.MALE);
 
         // when
         Long saveId = memberService.join(member);
 
         // then
         Member findMember = memberService.findOne(saveId).get();
-        Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
+        assertThat(member.getName()).isEqualTo(findMember.getName());
+        assertThat(member.getBarcode()).isEqualTo(findMember.getBarcode());
+
+        System.out.println("findMember = " + findMember.getId() + " | " + findMember.getRfid() + " | " + findMember.getBarcode());
+        System.out.println("member = " + member.getId() + " | " + member.getRfid() + " | " + member.getBarcode());
     }
 
     @Test
@@ -55,7 +56,7 @@ class MemberServiceTest {
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 
         // then
-        Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
     }
 
     /**

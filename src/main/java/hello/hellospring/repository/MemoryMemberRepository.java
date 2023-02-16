@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository{
 
-    private static Map<Long, Member> store = new HashMap<>();
+    private static final Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L; // 0, 1, 2 key 값을 차례 대로 생성할 static 변수
 
 
@@ -26,6 +26,20 @@ public class MemoryMemberRepository implements MemberRepository{
     public Optional<Member> findByName(String name) {
         return store.values().stream()
                 .filter(member -> member.getName().equals(name))
+                .findAny();
+    }
+
+    @Override
+    public Optional<Member> findByRfid(String rfid) {
+        return store.values().stream()
+                .filter(member -> member.getRfid().equals(rfid))
+                .findAny();
+    }
+
+    @Override
+    public Optional<Member> findByBarcode(String barcode) {
+        return store.values().stream()
+                .filter(member -> member.getBarcode().equals(barcode))
                 .findAny();
     }
 

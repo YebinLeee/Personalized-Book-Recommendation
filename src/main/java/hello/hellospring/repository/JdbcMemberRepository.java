@@ -160,6 +160,16 @@ public class JdbcMemberRepository implements MemberRepository{
         }
     }
 
+    @Override
+    public Optional<Member> findByRfid(String rfid){
+        return null;
+    }
+
+    @Override
+    public Optional<Member> findByBarcode(String barcode){
+        return null;
+    }
+
     private void close(Connection conn) throws SQLException {
         DataSourceUtils.releaseConnection(conn, dataSource);
     }

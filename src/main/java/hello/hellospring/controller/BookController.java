@@ -50,7 +50,6 @@ public class BookController {
         List<BookSearchedResult> results = bookSearchService.searchBooksByCategory(form.getInterest());
         model.addAttribute("results", results);
         return "book/result";
-
     }
 
     @GetMapping("/book")

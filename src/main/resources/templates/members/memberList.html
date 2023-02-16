@@ -9,6 +9,11 @@
         <tr>
           <th>#</th>
           <th>이름</th>
+          <th>비밀번호</th>
+          <th>RFID 번호</th>
+          <th>Barcode 번호</th>
+          <th>나이</th>
+          <th>성별</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +23,11 @@
       <tr th:each="member : ${members}">
         <td> <span th:text="${member.id}"> Id </span></td>
         <td> <span th:text="${member.name}"> Name </span></td>
+        <td> <span th:text="${member.password}"> PW </span></td>
+        <td> <span th:text="${member.rfid}"> Rfid </span></td>
+        <td> <span th:text="${member.barcode}"> Barcode </span></td>
+        <td> <span th:text="${member.age}"> Age </span></td>
+        <td> <span th:text="${member.gender}"> Gender </span></td>
       </tr>
       </tbody>
     </table>

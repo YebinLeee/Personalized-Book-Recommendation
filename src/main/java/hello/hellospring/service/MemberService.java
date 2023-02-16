@@ -48,4 +48,22 @@ public class MemberService {
     public Optional<Member> findOne(Long memberId){
         return memberRepository.findById(memberId);
     }
+
+    /**
+     * RFID Number로 회원 조회
+     * @param rfid
+     * @return
+     */
+    public Optional<Member> validateByRfid(String rfid){
+        return memberRepository.findByRfid(rfid);
+    }
+
+    /**
+     * Barcode Number로 회원 조회
+     * @param barcode
+     * @return
+     */
+    public Optional<Member> validateByBarcode(String barcode){
+        return memberRepository.findByBarcode(barcode);
+    }
 }

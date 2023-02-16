@@ -4,10 +4,29 @@
 
 <div class="container">
   <div>
-    <form action="/members/new" method="post">
+    <form action="/members/new" method="POST">
       <div class="form-group">
         <label for="name">이름</label>
         <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+
+        <label for="password">비밀 번호</label>
+        <input type="password" id="password" name="password" placeholder="비밀 번호를 입력하세요">
+
+        <label for="rfid">RFID</label>
+        <input type="text" id="rfid" name="rfid" placeholder="rifd 번호를 입력하세요">
+
+        <label for="barcode">Barcode</label>
+        <input type="text" id="barcode" name="barcode" placeholder="barcode 번호를 입력하세요">
+
+        <label for="age">나이</label>
+        <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
+
+        <label for="gender">성별</label>
+        <select id="gender" name="gender">
+          <option value="male">남자</option>
+          <option value="female">여자</option>
+        </select>
+
       </div>
       <button type="submit">등록</button>
     </form>
