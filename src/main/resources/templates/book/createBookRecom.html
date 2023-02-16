@@ -3,8 +3,9 @@
 <body>
 
 <div class="container">
+    <h2>도서 추천을 위한 정보를 입력해주세요.</h2>
     <div>
-        <form action="/book/search" method="GET">
+        <form id="action_form" action="/book/search" onsubmit="return beforeSubmit()" method="GET">
             <div class="form-group">
                 <div id="name-form">
                     <label for="name">이름</label>
@@ -65,10 +66,24 @@
                 </div>
 
             </div>
-            <button type="submit">완료</button>
+            <button id="submit" type="submit">완료</button>
         </form>
     </div>
 </div> <!-- /container -->
 
+
+<script>
+    function beforeSubmit(){
+        var name = document.getElementById('name').value;
+        var age = document.getElementById('age').value;
+        if(!name || !age){
+            alert("정보를 정확히 입력해주세요");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+</script>
 </body>
 </html>

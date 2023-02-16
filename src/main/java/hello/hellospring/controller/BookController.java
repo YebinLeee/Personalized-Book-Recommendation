@@ -45,7 +45,11 @@ public class BookController {
         memberInfo.setInterest(form.getInterest());
         memberInfo.setFeeling(form.getFeeling());
 
-        memberInfoService.join(memberInfo);
+        try {
+            memberInfoService.join(memberInfo);
+        }catch(IllegalStateException e){
+        }
+        model.addAttribute("member", form);
 
         List<BookSearchedResult> results = bookSearchService.searchBooksByCategory(form.getInterest());
         model.addAttribute("results", results);
