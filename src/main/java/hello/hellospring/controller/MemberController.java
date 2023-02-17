@@ -25,12 +25,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/members/new")
+    @GetMapping(value = "/members/new")
     public String createForm(){
         return "members/createMemberForm";
     }
 
-    @PostMapping("/members/new")
+    @PostMapping(value = "/members/new")
     public String create(MemberForm form){
         Member member = new Member();
 
@@ -51,19 +51,19 @@ public class MemberController {
         return "redirect:/"; // 홈 화면 으로 redirect
     }
 
-    @GetMapping("/members")
+    @GetMapping(value = "/members")
     public String list(Model model){
         List<Member> members = memberService.findMembers();
         model.addAttribute("members",members);
         return "members/memberList";
     }
 
-    @GetMapping("/members/confirm")
-    public String login(){
+    @GetMapping(value = "/members/confirm")
+    public String confirm(){
         return "members/memberConfirmForm";
     }
 
-    @PostMapping("/members/confirm")
+    @PostMapping(value = "/members/confirm")
     public String confirm(MemberConfirmForm confirmForm, Model model){
         String rfid = confirmForm.getRfid();
         String barcode = confirmForm.getBarcode();

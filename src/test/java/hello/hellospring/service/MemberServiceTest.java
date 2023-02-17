@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @Transactional
 class MemberServiceTest {
-   @Autowired MemberService memberService;
+   @Autowired
+   MemberService memberService;
 
    @BeforeEach
    void beforeEach(){

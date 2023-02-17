@@ -6,6 +6,9 @@ import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberInfoRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.BookSearchService;
+import hello.hellospring.service.Impl.BookSearchServiceImpl;
+import hello.hellospring.service.Impl.MemberInfoServiceImpl;
+import hello.hellospring.service.Impl.MemberServiceImpl;
 import hello.hellospring.service.MemberInfoService;
 import hello.hellospring.service.MemberService;
 import jakarta.persistence.EntityManager;
@@ -27,12 +30,12 @@ public class SpringConfig {
 
     @Bean
     public MemberInfoService memberInfoService(){
-        return new MemberInfoService(memberInfoRepository());
+        return new MemberInfoServiceImpl(memberInfoRepository());
     }
 
     @Bean
     public MemberService memberService(){
-        return new MemberService(memberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
@@ -50,7 +53,7 @@ public class SpringConfig {
 
     @Bean
     public BookSearchService bookSearchService(){
-        return new BookSearchService();
+        return new BookSearchServiceImpl();
     }
 
     public TimeTraceAop timeTraceAop(){
