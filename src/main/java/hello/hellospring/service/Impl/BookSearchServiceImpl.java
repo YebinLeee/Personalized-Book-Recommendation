@@ -81,7 +81,6 @@ public class BookSearchServiceImpl implements BookSearchService {
         }
 
         return getAladinBookResults(new JSONObject(response));
-
     }
 
     @Override
@@ -136,7 +135,32 @@ public class BookSearchServiceImpl implements BookSearchService {
     }
 
 
-    public List<BookSearchedResult> getAladinBookResults(JSONObject jsonObject){
+    @Override
+    public List<BookSearchedResult> searchBooksByFeeling(String feeling) {
+        AladinQueryParams params = new AladinQueryParams();
+        AladinParamSetter paramSetter = new AladinParamSetter();
+
+        switch (feeling) {
+            case "슬픔", "두려움", "우울함", "분노", "불안함", "후회" -> params.setCategoryId(51375);
+            default -> params.setCategoryId(0);
+        }
+
+        paramSetter.setRequestUrl(AlADIN_ITEM_LIST_API_URL);
+
+        String requestUrl = paramSetter.setParams(params);
+        Connection connection = Jsoup.connect(requestUrl);
+
+        String response;
+        try {
+            response = connection.ignoreContentType(true).execute().body();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return getAladinBookResults(new JSONObject(response));
+    }
+
+    private static List<BookSearchedResult> getAladinBookResults(JSONObject jsonObject){
         List<BookSearchedResult> results = new ArrayList<>();
         JSONArray items = jsonObject.getJSONArray("item");
 
@@ -158,7 +182,7 @@ public class BookSearchServiceImpl implements BookSearchService {
         return results;
     }
 
-    public List<BookSearchedResult> getLibraryBigdataBookResults(JSONObject jsonObject){
+    private static List<BookSearchedResult> getLibraryBigdataBookResults(JSONObject jsonObject){
         List<BookSearchedResult> results = new ArrayList<>();
         JSONObject response = jsonObject.getJSONObject("response");
         JSONArray items = response.getJSONArray("docs");

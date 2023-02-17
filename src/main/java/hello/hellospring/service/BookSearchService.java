@@ -10,4 +10,5 @@ public interface BookSearchService {
     List<BookSearchedResult> searchBooksByQuery(BookSearchQuery query);
     List<BookSearchedResult> searchBooksByCategory(String interest);
     List<BookSearchedResult> searchBooksByAgeandGender(int age, Gender gender);
+    List<BookSearchedResult> searchBooksByFeeling(String feeling);
 }

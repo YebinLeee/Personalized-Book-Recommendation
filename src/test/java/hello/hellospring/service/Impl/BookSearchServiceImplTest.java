@@ -35,6 +35,16 @@ class BookSearchServiceImplTest {
     }
 
     @Test
+    void searchBooksByFeeling(){
+        String feeling = "기쁨";
+
+        List<BookSearchedResult> results = bookSearchService.searchBooksByFeeling(feeling);
+        for (BookSearchedResult result : results) {
+            System.out.println("result = " + result.getTitle());
+        }
+    }
+
+    @Test
     void getAladinBookResults() {
     }
 }
