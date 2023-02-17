@@ -8,22 +8,22 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookSearchServiceImpl implements BookSearchService {
+import static hello.hellospring.service.constant.ConstantValue.AlADIN_ITEM_LIST_API_URL;
+import static hello.hellospring.service.constant.ConstantValue.AlADIN_ITEM_SEARCH_API_URL;
 
-    private static final String itemListUrl = "http://www.aladin.co.kr/ttb/api/ItemList.aspx";
-    private static final String itemSearchUrl = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx";
+public class BookSearchServiceImpl implements BookSearchService {
 
     public List<BookSearchedResult> searchBooksByQuery(BookSearchQuery query) {
         BookSearchQueryParams params = new BookSearchQueryParams();
         params.setQuery(query.getQuery());
 
-        String requestUrl = setParameters(itemSearchUrl, params);
+        AladinParamSetter aladinParamSetter = new AladinParamSetter(AlADIN_ITEM_SEARCH_API_URL);
+        String requestUrl = aladinParamSetter.set(params);
         Connection connection = Jsoup.connect(requestUrl);
 
         String response;
@@ -38,7 +38,6 @@ public class BookSearchServiceImpl implements BookSearchService {
 
     public List<BookSearchedResult> searchBooksByCategory(String interest){
         int categoryId = 0;
-
         switch (interest) {
             case "자기계발" -> categoryId = 336;
             case "취미" -> categoryId = 558890;
@@ -62,7 +61,8 @@ public class BookSearchServiceImpl implements BookSearchService {
         BookSearchQueryParams params = new BookSearchQueryParams();
         params.setCategoryId(categoryId);
 
-        String requestUrl = setParameters(itemListUrl, params);
+        AladinParamSetter aladinParamSetter = new AladinParamSetter(AlADIN_ITEM_LIST_API_URL);
+        String requestUrl = aladinParamSetter.set(params);
         Connection connection = Jsoup.connect(requestUrl);
 
         String response;
@@ -74,27 +74,6 @@ public class BookSearchServiceImpl implements BookSearchService {
 
         return getBookResults(new JSONObject(response));
     }
-
-    private String setParameters(String requestUrl, BookSearchQueryParams params){
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(requestUrl)
-                .queryParam("ttbkey", params.getKey())
-                .queryParam("maxResults", params.getMaxResults())
-                .queryParam("sort", params.getSort())
-                .queryParam("cover", params.getCoverSize())
-                .queryParam("output", params.getOutput())
-                .queryParam("categoryId", params.getCategoryId())
-                .queryParam("version", params.getVersion());
-
-        if (requestUrl.equals(itemSearchUrl)){
-            uriComponentsBuilder.queryParam("query", params.getQuery());
-        }
-        else if (requestUrl.equals(itemListUrl)){
-            uriComponentsBuilder.queryParam("queryType", params.getQueryType());
-        }
-
-        return uriComponentsBuilder.toUriString();
-    }
-
     public List<BookSearchedResult> getBookResults(JSONObject jsonObject){
         List<BookSearchedResult> results = new ArrayList<>();
         JSONArray items = jsonObject.getJSONArray("item");
