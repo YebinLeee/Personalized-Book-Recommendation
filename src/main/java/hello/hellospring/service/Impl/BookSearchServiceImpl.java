@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ import java.util.List;
 
 import static hello.hellospring.service.constant.ConstantValue.*;
 
+@Component
 public class BookSearchServiceImpl implements BookSearchService {
+
     @Override
     public List<BookSearchedResult> searchBooksByQuery(BookSearchQuery query) {
         AladinQueryParams params = new AladinQueryParams();
@@ -142,7 +145,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 
         switch (feeling) {
             case "슬픔", "두려움", "우울함", "분노", "불안함", "후회" -> params.setCategoryId(51375);
-            default -> params.setCategoryId(0);
+            default -> params.setCategoryId(50940);
         }
 
         paramSetter.setRequestUrl(AlADIN_ITEM_LIST_API_URL);
@@ -162,6 +165,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 
     private static List<BookSearchedResult> getAladinBookResults(JSONObject jsonObject){
         List<BookSearchedResult> results = new ArrayList<>();
+        System.out.println("jsonObject = " + jsonObject);
         JSONArray items = jsonObject.getJSONArray("item");
 
         for (int i = 0; i < items.length(); i++) {

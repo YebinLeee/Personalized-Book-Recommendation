@@ -4,10 +4,12 @@ import hello.hellospring.domain.MemberInfo;
 import hello.hellospring.repository.MemberInfoRepository;
 import hello.hellospring.service.MemberInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class MemberInfoServiceImpl implements MemberInfoService {
     private final MemberInfoRepository memberInfoRepository;
 

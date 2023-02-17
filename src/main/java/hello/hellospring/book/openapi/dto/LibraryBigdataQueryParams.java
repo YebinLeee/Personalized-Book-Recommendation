@@ -8,8 +8,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class LibraryBigdataQueryParams {
-    // startDt=2022-11-01&endDt=2023-02-08&gender=0&age=14&region=11&format=json&pageSize=2
-
     private String authKey;
     private String startDate;
     private int gender;

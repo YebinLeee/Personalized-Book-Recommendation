@@ -27,4 +27,5 @@ public class AladinQueryParams {
         setQueryType("BestSeller");
         setVersion(20131101);
     }
+
 }

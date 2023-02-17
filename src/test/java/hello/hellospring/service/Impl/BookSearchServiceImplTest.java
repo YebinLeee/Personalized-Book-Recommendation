@@ -3,6 +3,7 @@ package hello.hellospring.service.Impl;
 import hello.hellospring.book.dto.BookSearchedResult;
 import hello.hellospring.domain.Gender;
 import hello.hellospring.service.BookSearchService;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 class BookSearchServiceImplTest {
 
     @Autowired

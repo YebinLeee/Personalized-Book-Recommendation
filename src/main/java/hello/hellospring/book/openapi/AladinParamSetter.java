@@ -4,10 +4,12 @@ import hello.hellospring.book.openapi.dto.AladinQueryParams;
 import hello.hellospring.service.constant.ConstantValue;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Getter
 @Setter
+@Component
 public class AladinParamSetter {
     private String requestUrl;
 

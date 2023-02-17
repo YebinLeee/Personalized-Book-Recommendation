@@ -14,10 +14,9 @@ import hello.hellospring.service.MemberService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
 
-@Configuration
+@ComponentScan
 public class SpringConfig {
 
     @PersistenceContext
@@ -28,17 +27,14 @@ public class SpringConfig {
         this.em = em;
     }
 
-    @Bean
     public MemberInfoService memberInfoService(){
         return new MemberInfoServiceImpl(memberInfoRepository());
     }
 
-    @Bean
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
     }
 
-    @Bean
     public MemberRepository memberRepository(){
         // return new MemoryMemberRepository();
         // return new JdbcMemberRepository(dataSource);
@@ -46,12 +42,10 @@ public class SpringConfig {
         return new JpaMemberRepository(em);
     }
 
-    @Bean
     public MemberInfoRepository memberInfoRepository(){
         return new JpaMemberInfoRepository(em);
     }
 
-    @Bean
     public BookSearchService bookSearchService(){
         return new BookSearchServiceImpl();
     }
