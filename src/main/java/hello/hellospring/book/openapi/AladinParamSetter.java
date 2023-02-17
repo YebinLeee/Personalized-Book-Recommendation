@@ -1,19 +1,17 @@
-package hello.hellospring.service.Impl;
+package hello.hellospring.book.openapi;
 
 import hello.hellospring.book.dto.BookSearchQueryParams;
+import hello.hellospring.service.constant.ConstantValue;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import static hello.hellospring.service.constant.ConstantValue.AlADIN_ITEM_LIST_API_URL;
-import static hello.hellospring.service.constant.ConstantValue.AlADIN_ITEM_SEARCH_API_URL;
-
+@Getter
+@Setter
 public class AladinParamSetter {
-    private final String requestUrl;
+    private String requestUrl;
 
-    public AladinParamSetter(String requestUrl) {
-        this.requestUrl = requestUrl;
-    }
-
-    public String set(BookSearchQueryParams params){
+    public String setParams(BookSearchQueryParams params){
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(requestUrl)
                 .queryParam("ttbkey", params.getKey())
                 .queryParam("maxResults", params.getMaxResults())
@@ -23,10 +21,10 @@ public class AladinParamSetter {
                 .queryParam("categoryId", params.getCategoryId())
                 .queryParam("version", params.getVersion());
 
-        if (requestUrl.equals(AlADIN_ITEM_LIST_API_URL)){
+        if (requestUrl.equals(ConstantValue.AlADIN_ITEM_SEARCH_API_URL)){
             uriComponentsBuilder.queryParam("query", params.getQuery());
         }
-        else if (requestUrl.equals(AlADIN_ITEM_SEARCH_API_URL)){
+        else if (requestUrl.equals(ConstantValue.AlADIN_ITEM_LIST_API_URL)){
             uriComponentsBuilder.queryParam("queryType", params.getQueryType());
         }
 

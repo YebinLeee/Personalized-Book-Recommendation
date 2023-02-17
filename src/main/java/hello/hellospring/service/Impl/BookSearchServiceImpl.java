@@ -3,6 +3,7 @@ package hello.hellospring.service.Impl;
 import hello.hellospring.book.dto.BookSearchQuery;
 import hello.hellospring.book.dto.BookSearchQueryParams;
 import hello.hellospring.book.dto.BookSearchedResult;
+import hello.hellospring.book.openapi.AladinParamSetter;
 import hello.hellospring.service.BookSearchService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,13 +18,19 @@ import static hello.hellospring.service.constant.ConstantValue.AlADIN_ITEM_LIST_
 import static hello.hellospring.service.constant.ConstantValue.AlADIN_ITEM_SEARCH_API_URL;
 
 public class BookSearchServiceImpl implements BookSearchService {
+    private final BookSearchQueryParams params;
+    private final AladinParamSetter paramSetter;
+
+    public BookSearchServiceImpl() {
+        this.params = new BookSearchQueryParams();
+        this.paramSetter = new AladinParamSetter();
+    }
 
     public List<BookSearchedResult> searchBooksByQuery(BookSearchQuery query) {
-        BookSearchQueryParams params = new BookSearchQueryParams();
         params.setQuery(query.getQuery());
+        paramSetter.setRequestUrl(AlADIN_ITEM_SEARCH_API_URL);
 
-        AladinParamSetter aladinParamSetter = new AladinParamSetter(AlADIN_ITEM_SEARCH_API_URL);
-        String requestUrl = aladinParamSetter.set(params);
+        String requestUrl = paramSetter.setParams(params);
         Connection connection = Jsoup.connect(requestUrl);
 
         String response;
@@ -58,11 +65,10 @@ public class BookSearchServiceImpl implements BookSearchService {
             }
         }
 
-        BookSearchQueryParams params = new BookSearchQueryParams();
         params.setCategoryId(categoryId);
+        paramSetter.setRequestUrl(AlADIN_ITEM_LIST_API_URL);
 
-        AladinParamSetter aladinParamSetter = new AladinParamSetter(AlADIN_ITEM_LIST_API_URL);
-        String requestUrl = aladinParamSetter.set(params);
+        String requestUrl = paramSetter.setParams(params);
         Connection connection = Jsoup.connect(requestUrl);
 
         String response;
@@ -74,6 +80,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 
         return getBookResults(new JSONObject(response));
     }
+
     public List<BookSearchedResult> getBookResults(JSONObject jsonObject){
         List<BookSearchedResult> results = new ArrayList<>();
         JSONArray items = jsonObject.getJSONArray("item");
