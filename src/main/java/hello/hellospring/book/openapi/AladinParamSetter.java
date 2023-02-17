@@ -1,6 +1,6 @@
 package hello.hellospring.book.openapi;
 
-import hello.hellospring.book.dto.BookSearchQueryParams;
+import hello.hellospring.book.openapi.dto.AladinQueryParams;
 import hello.hellospring.service.constant.ConstantValue;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class AladinParamSetter {
     private String requestUrl;
 
-    public String setParams(BookSearchQueryParams params){
+    public String setParams(AladinQueryParams params){
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(requestUrl)
                 .queryParam("ttbkey", params.getKey())
                 .queryParam("maxResults", params.getMaxResults())
@@ -30,5 +30,4 @@ public class AladinParamSetter {
 
         return uriComponentsBuilder.toUriString();
     }
-
 }

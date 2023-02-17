@@ -12,9 +12,8 @@ public class BookSearchedResult {
     private String author;
     private String pubDate;
     private String isbn;
-    private Long categoryId;
+    private String categoryId;
     private String categoryName;
     private String publisher;
-    private Long priceSales;
     private String coverLink;
 }

@@ -1,4 +1,4 @@
-package hello.hellospring.book.dto;
+package hello.hellospring.book.openapi.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BookSearchQueryParams {
+public class AladinQueryParams {
     private String key;
     private String query;
     private String queryType;
@@ -18,7 +18,7 @@ public class BookSearchQueryParams {
     private int categoryId;
     private int version;
 
-    public BookSearchQueryParams(){
+    public AladinQueryParams(){
         setKey("ttbyebin2lee1424001");
         setMaxResults(10);
         setSort("SalesPoint");

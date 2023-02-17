@@ -2,17 +2,19 @@ package hello.hellospring.book;
 
 import hello.hellospring.book.dto.BookSearchQuery;
 import hello.hellospring.book.dto.BookSearchedResult;
-import hello.hellospring.service.BookSearchService;
-import jakarta.transaction.Transactional;
+import hello.hellospring.service.Impl.BookSearchServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@Transactional
+@SpringBootTest
 public class AladinBookSearchTest {
+    @Autowired private BookSearchServiceImpl bookSearchService;
+
     @Test
     void 자바_쿼리로_책검색하기(){
-        BookSearchService bookSearchService = new BookSearchService();
         BookSearchQuery query = new BookSearchQuery();
         query.setQuery("java");
 
