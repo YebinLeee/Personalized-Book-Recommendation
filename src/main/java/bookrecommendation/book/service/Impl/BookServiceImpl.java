@@ -1,13 +1,14 @@
 package bookrecommendation.book.service.Impl;
 
 import bookrecommendation.book.domain.Gender;
+import bookrecommendation.book.domain.Interest;
 import bookrecommendation.book.dto.BookDto;
 import bookrecommendation.book.dto.BookSearchQuery;
 import bookrecommendation.book.openapi.AladinParamSetter;
 import bookrecommendation.book.openapi.LibraryBigdataParamSetter;
 import bookrecommendation.book.openapi.params.AladinQueryParams;
 import bookrecommendation.book.openapi.params.LibraryBigdataQueryParams;
-import bookrecommendation.book.service.BookSearchService;
+import bookrecommendation.book.service.BookService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Connection;
@@ -21,10 +22,10 @@ import java.util.List;
 import static bookrecommendation.book.openapi.constant.ApiUrlConstant.*;
 
 @Component
-public class BookSearchServiceImpl implements BookSearchService {
+public class BookServiceImpl implements BookService {
 
     @Override
-    public List<BookDto> searchBooksByQuery(BookSearchQuery query) {
+    public List<BookDto> searchByQuery(BookSearchQuery query) {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
 
@@ -45,27 +46,28 @@ public class BookSearchServiceImpl implements BookSearchService {
     }
 
     @Override
-    public List<BookDto> searchBooksByCategory(String interest){
+    public List<BookDto> searchByCategory(String interestValue){
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
 
+        Interest interest  = Interest.valueOf(interestValue);
         int categoryId = 0;
         switch (interest) {
-            case "자기계발" -> categoryId = 336;
-            case "취미" -> categoryId = 558890;
-            case "여행" -> categoryId = 51377;
-            case "요리" -> categoryId = 53471;
-            case "취업" -> categoryId = 249;
-            case "직장" -> categoryId = 2172;
-            case "수험생" -> categoryId = 1383;
-            case "외국어" -> categoryId = 1322;
-            case "종교" -> categoryId = 17436;
-            case "스포츠" -> categoryId = 8097;
-            case "IT" -> categoryId = 8537;
-            case "자연" -> categoryId = 8260;
-            case "예술" -> categoryId = 518;
-            case "사회" -> categoryId = 51306;
-            case "과학" -> categoryId = 887;
+            case SELF_IMPROVEMENT -> categoryId = 336;
+            case HOBBY -> categoryId = 558890;
+            case TRAVEL -> categoryId = 51377;
+            case COOKBOOK -> categoryId = 53471;
+            case EMPLOYMENT -> categoryId = 249;
+            case WORK -> categoryId = 2172;
+            case EXAMINEES -> categoryId = 1383;
+            case FOREIGN_LANGUAGES-> categoryId = 1322;
+            case RELIGION -> categoryId = 17436;
+            case SPORTS -> categoryId = 8097;
+            case IT -> categoryId = 8537;
+            case NATURE -> categoryId = 8260;
+            case ARTS -> categoryId = 518;
+            case SOCIOLOGY -> categoryId = 51306;
+            case SCIENCE -> categoryId = 887;
             default -> {
             }
         }
@@ -87,7 +89,7 @@ public class BookSearchServiceImpl implements BookSearchService {
     }
 
     @Override
-    public List<BookDto> searchBooksByAgeandGender(int age, Gender gender) {
+    public List<BookDto> searchByAgeAndGender(int age, Gender gender) {
         LibraryBigdataQueryParams params = new LibraryBigdataQueryParams();
         LibraryBigdataParamSetter paramSetter = new LibraryBigdataParamSetter();
 
@@ -139,7 +141,7 @@ public class BookSearchServiceImpl implements BookSearchService {
 
 
     @Override
-    public List<BookDto> searchBooksByFeeling(String feeling) {
+    public List<BookDto> searchByFeeling(String feeling) {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
 

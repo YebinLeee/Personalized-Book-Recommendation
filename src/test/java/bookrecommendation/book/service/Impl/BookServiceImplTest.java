@@ -1,8 +1,8 @@
 package bookrecommendation.book.service.Impl;
 
-import bookrecommendation.book.dto.BookDto;
 import bookrecommendation.book.domain.Gender;
-import bookrecommendation.book.service.BookSearchService;
+import bookrecommendation.book.dto.BookDto;
+import bookrecommendation.book.service.BookService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
-class BookSearchServiceImplTest {
+class BookServiceImplTest {
 
     @Autowired
-    BookSearchService bookSearchService;
+    BookService bookService;
 
     @Test
     void searchBooksByQuery() {
@@ -23,6 +23,13 @@ class BookSearchServiceImplTest {
 
     @Test
     void searchBooksByCategory() {
+        String interest = "IT";
+
+        List<BookDto> bookDtos = bookService.searchByCategory(interest);
+        for (BookDto bookDto : bookDtos) {
+            System.out.println("bookDto = " + bookDto.getTitle());
+        }
+
     }
 
     @Test
@@ -30,7 +37,7 @@ class BookSearchServiceImplTest {
         int age = 24;
         Gender gender = Gender.FEMALE;
 
-        List<BookDto> results = bookSearchService.searchBooksByAgeandGender(age, gender);
+        List<BookDto> results = bookService.searchByAgeAndGender(age, gender);
         for (BookDto result : results) {
             System.out.println("result.getTitle() = " + result.getTitle());
         }
@@ -40,7 +47,7 @@ class BookSearchServiceImplTest {
     void searchBooksByFeeling(){
         String feeling = "기쁨";
 
-        List<BookDto> results = bookSearchService.searchBooksByFeeling(feeling);
+        List<BookDto> results = bookService.searchByFeeling(feeling);
         for (BookDto result : results) {
             System.out.println("result = " + result.getTitle());
         }
