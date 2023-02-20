@@ -18,10 +18,6 @@ class BookServiceImplTest {
     BookService bookService;
 
     @Test
-    void searchBooksByQuery() {
-    }
-
-    @Test
     void searchBooksByCategory() {
         String interest = "IT";
 
@@ -29,7 +25,6 @@ class BookServiceImplTest {
         for (BookDto bookDto : bookDtos) {
             System.out.println("bookDto = " + bookDto.getTitle());
         }
-
     }
 
     @Test
@@ -51,9 +46,5 @@ class BookServiceImplTest {
         for (BookDto result : results) {
             System.out.println("result = " + result.getTitle());
         }
-    }
-
-    @Test
-    void getAladinBookResults() {
     }
 }

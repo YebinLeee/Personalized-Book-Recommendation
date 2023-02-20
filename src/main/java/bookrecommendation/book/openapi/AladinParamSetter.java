@@ -1,15 +1,13 @@
 package bookrecommendation.book.openapi;
 
-import bookrecommendation.book.openapi.params.AladinQueryParams;
 import bookrecommendation.book.openapi.constant.ApiUrlConstant;
+import bookrecommendation.book.openapi.params.AladinQueryParams;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Getter
 @Setter
-@Component
 public class AladinParamSetter {
     private String requestUrl;
 

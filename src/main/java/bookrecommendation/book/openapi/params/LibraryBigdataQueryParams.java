@@ -20,7 +20,7 @@ public class LibraryBigdataQueryParams {
         setStartDate("2022-01-01");
         setGender(2);
         setAge(-1);
-        setPageSize(2);
+        setPageSize(1);
         setFormat("json");
     }
 }

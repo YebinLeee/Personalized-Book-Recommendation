@@ -20,7 +20,7 @@ public class AladinQueryParams {
 
     public AladinQueryParams(){
         setKey("ttbyebin2lee1424001");
-        setMaxResults(10);
+        setMaxResults(1);
         setSort("SalesPoint");
         setCoverSize("Mid");
         setOutput("js");
