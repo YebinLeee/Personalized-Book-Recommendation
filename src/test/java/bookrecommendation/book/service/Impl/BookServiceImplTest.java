@@ -45,7 +45,7 @@ class BookServiceImplTest {
 
     @Test
     void searchBooksByFeeling(){
-        String feeling = "기쁨";
+        String feeling = "분노";
 
         List<BookDto> results = bookService.searchByFeeling(feeling);
         for (BookDto result : results) {

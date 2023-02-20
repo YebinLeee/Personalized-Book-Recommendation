@@ -22,5 +22,14 @@ public enum Interest {
     SOCIOLOGY("사회"),
     SCIENCE("과학");
 
-    private String description;
+    private final String description;
+
+    public static Interest valueOfDescription(String description){
+        for (Interest interest : values()){
+            if(interest.description.equals(description)){
+                return interest;
+            }
+        }
+        return null;
+    }
 }

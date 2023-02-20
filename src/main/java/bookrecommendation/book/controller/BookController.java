@@ -1,9 +1,9 @@
 package bookrecommendation.book.controller;
 
-import bookrecommendation.book.dto.BookSearchQuery;
-import bookrecommendation.book.dto.BookDto;
-import bookrecommendation.book.form.BookRecomForm;
 import bookrecommendation.book.domain.MemberInfo;
+import bookrecommendation.book.dto.BookDto;
+import bookrecommendation.book.dto.BookSearchQuery;
+import bookrecommendation.book.form.BookRecomForm;
 import bookrecommendation.book.service.BookService;
 import bookrecommendation.book.service.MemberInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class BookController {
 
         try {
             memberInfoService.join(memberInfo);
-        }catch(IllegalStateException e){
+        }catch(IllegalStateException ignored){
         }
         model.addAttribute("member", form);
 
