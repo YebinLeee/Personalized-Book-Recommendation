@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 public class MemberFoundResponseDto {
     private char is_authenticated;
-    private Long id;
+    private String id;
     private String name;
     private Gender gender;
     private int age;
 
     public MemberFoundResponseDto() {
-        setId(0L);
+        setId(String.valueOf(0L));
     }
 }

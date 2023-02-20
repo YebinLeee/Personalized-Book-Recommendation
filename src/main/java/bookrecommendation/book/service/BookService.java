@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface BookService {
-    List<BookDto> searchByCategory(String interest);
+    List<BookDto> searchByInterest(String interest);
     List<BookDto> searchByAgeAndGender(int age, Gender gender);
     List<BookDto> searchByFeeling(String feeling);
 }

@@ -1,4 +1,4 @@
-package bookrecommendation.book.controller;
+package bookrecommendation.book.controller.rest;
 
 import org.springframework.stereotype.Controller;
 

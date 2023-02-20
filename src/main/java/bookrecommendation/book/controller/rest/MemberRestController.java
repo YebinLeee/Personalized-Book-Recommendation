@@ -1,4 +1,4 @@
-package bookrecommendation.book.controller;
+package bookrecommendation.book.controller.rest;
 
 import bookrecommendation.book.dto.BarcodeDto;
 import bookrecommendation.book.dto.MemberFoundResponseDto;
@@ -64,7 +64,7 @@ public class MemberRestController {
             Member member = memberFind.get();
 
             responseDto.setIs_authenticated('Y');
-            responseDto.setId(member.getId());
+            responseDto.setId(String.valueOf(member.getId()));
             responseDto.setGender(member.getGender());
             responseDto.setName(member.getName());
             responseDto.setAge(member.getAge());
