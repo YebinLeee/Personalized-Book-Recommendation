@@ -31,7 +31,7 @@ public class AladinApiServiceImpl implements AladinApiService {
 
 
     @Override
-    public List<BookDto> searchByCategory(String interestValue) {
+    public List<BookDto> searchByInterest(String interestValue) {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
 

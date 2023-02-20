@@ -25,8 +25,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> searchByCategory(String interest) {
-        return aladinApiService.searchByCategory(interest);
+    public List<BookDto> searchByInterest(String interest) {
+        return aladinApiService.searchByInterest(interest);
     }
 
     @Override

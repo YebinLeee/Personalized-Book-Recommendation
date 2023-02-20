@@ -21,7 +21,7 @@ class BookServiceImplTest {
     void searchBooksByCategory() {
         String interest = "IT";
 
-        List<BookDto> bookDtos = bookService.searchByCategory(interest);
+        List<BookDto> bookDtos = bookService.searchByInterest(interest);
         for (BookDto bookDto : bookDtos) {
             System.out.println("bookDto = " + bookDto.getTitle());
         }

@@ -5,7 +5,6 @@ import bookrecommendation.book.dto.BookDto;
 import bookrecommendation.book.dto.BookSearchQuery;
 import bookrecommendation.book.form.BookRecomForm;
 import bookrecommendation.book.service.BookService;
-import bookrecommendation.book.service.Impl.BookServiceImpl;
 import bookrecommendation.book.service.Impl.BookServiceImplPrevious;
 import bookrecommendation.book.service.MemberInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,11 @@ public class BookController {
 
     private final MemberInfoService memberInfoService;
     private final BookService bookService;
-    private final BookServiceImpl bookServiceImpl;
 
     @Autowired
-    public BookController(MemberInfoService memberInfoService, BookService bookService, BookServiceImpl bookServiceImpl) {
+    public BookController(MemberInfoService memberInfoService, BookService bookService) {
         this.memberInfoService = memberInfoService;
         this.bookService = bookService;
-        this.bookServiceImpl = bookServiceImpl;
     }
 
     @GetMapping("/book/new")
@@ -55,7 +52,7 @@ public class BookController {
         }
         model.addAttribute("member", form);
 
-        List<BookDto> results = bookService.searchByCategory(form.getInterest());
+        List<BookDto> results = bookService.searchByInterest(form.getInterest());
         model.addAttribute("results", results);
         return "book/result";
     }
