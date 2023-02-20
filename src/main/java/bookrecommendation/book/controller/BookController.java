@@ -5,6 +5,8 @@ import bookrecommendation.book.dto.BookDto;
 import bookrecommendation.book.dto.BookSearchQuery;
 import bookrecommendation.book.form.BookRecomForm;
 import bookrecommendation.book.service.BookService;
+import bookrecommendation.book.service.Impl.BookServiceImpl;
+import bookrecommendation.book.service.Impl.BookServiceImplPrevious;
 import bookrecommendation.book.service.MemberInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,13 @@ public class BookController {
 
     private final MemberInfoService memberInfoService;
     private final BookService bookService;
+    private final BookServiceImpl bookServiceImpl;
 
     @Autowired
-    public BookController(MemberInfoService memberInfoService, BookService bookService) {
+    public BookController(MemberInfoService memberInfoService, BookService bookService, BookServiceImpl bookServiceImpl) {
         this.memberInfoService = memberInfoService;
         this.bookService = bookService;
+        this.bookServiceImpl = bookServiceImpl;
     }
 
     @GetMapping("/book/new")
@@ -66,7 +70,8 @@ public class BookController {
 
     @RequestMapping(value = "/book/result", method = RequestMethod.GET)
     public String showResult(Model model, BookSearchQuery query) {
-        List<BookDto> results = bookService.searchByQuery(query);
+        BookServiceImplPrevious bookServiceImpl = new BookServiceImplPrevious();
+        List<BookDto> results = bookServiceImpl.searchByQuery(query);
         model.addAttribute("results", results);
         return "book/result";
     }

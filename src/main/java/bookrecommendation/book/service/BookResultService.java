@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface BookResultService {
     List<BookDto> getResult(JSONObject jsonObject);
-
 }

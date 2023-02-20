@@ -6,7 +6,6 @@ import bookrecommendation.book.dto.BookDto;
 import bookrecommendation.book.openapi.AladinParamSetter;
 import bookrecommendation.book.openapi.params.AladinQueryParams;
 import bookrecommendation.book.service.AladinApiService;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,7 +51,7 @@ public class AladinApiServiceImpl implements AladinApiService {
             throw new RuntimeException(e);
         }
 
-        return getResults(new JSONObject(response));
+        return aladinBookResultService.getResult(new JSONObject(response));
     }
 
     private static int getCategoryByInterest(Interest interest) {
@@ -104,31 +102,7 @@ public class AladinApiServiceImpl implements AladinApiService {
             throw new RuntimeException(e);
         }
 
-        return getResults(new JSONObject(response));
+        return aladinBookResultService.getResult(new JSONObject(response));
 
-    }
-
-    @Override
-    public List<BookDto> getResults(JSONObject jsonObject) {
-        List<BookDto> results = new ArrayList<>();
-        System.out.println("jsonObject = " + jsonObject);
-        JSONArray items = jsonObject.getJSONArray("item");
-
-        for (int i = 0; i < items.length(); i++) {
-            BookDto result = new BookDto();
-
-            JSONObject item = items.getJSONObject(i);
-            result.setTitle(item.getString("title"));
-            result.setLink(item.getString("link"));
-            result.setAuthor(item.getString("author"));
-            result.setPubDate(item.getString("pubDate"));
-            result.setIsbn(item.getString("isbn"));
-            result.setCategoryId(String.valueOf(item.getLong("categoryId")));
-            result.setCategoryName(item.getString("categoryName"));
-            result.setPublisher(item.getString("publisher"));
-            result.setCoverLink(item.getString("cover"));
-            results.add(result);
-        }
-        return results;
     }
 }

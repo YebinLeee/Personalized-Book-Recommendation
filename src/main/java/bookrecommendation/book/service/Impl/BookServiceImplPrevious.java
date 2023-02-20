@@ -25,8 +25,7 @@ import static bookrecommendation.book.openapi.constant.ApiUrlConstant.*;
 
 @Component
 public class BookServiceImplPrevious implements BookService {
-
-    @Override
+    
     public List<BookDto> searchByQuery(BookSearchQuery query) {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
