@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemberFoundResponseDto {
-    private char is_authenticated;
     private String id;
     private String name;
     private Gender gender;
