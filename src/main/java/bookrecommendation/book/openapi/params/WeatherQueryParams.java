@@ -25,11 +25,13 @@ public class WeatherQueryParams {
         setBaseTime(getRecentHour());
         setDataType("json");
     }
+
     public static String getTodayDate(){
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         return today.format(formatter);
     }
+
     public static String getRecentHour(){
         int hour = LocalTime.now().getHour();
 

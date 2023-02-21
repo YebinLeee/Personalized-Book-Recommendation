@@ -1,5 +1,7 @@
 package bookrecommendation.book.controller.rest;
 
+import bookrecommendation.book.controller.status.StatusCode;
+import bookrecommendation.book.controller.status.WeatherResponse;
 import bookrecommendation.book.dto.WeatherCodeDto;
 import bookrecommendation.book.service.WeatherService;
 import jakarta.transaction.Transactional;
@@ -20,7 +22,17 @@ public class WeatherRestController {
     }
 
     @GetMapping(value = "/weather")
-    public ResponseEntity<WeatherCodeDto> getWeatherCode(){
-        return ResponseEntity.status(HttpStatus.OK).body(WeatherService.getWeather());
+    public ResponseEntity<WeatherResponse> getWeatherCode(){
+        WeatherResponse response = new WeatherResponse();
+        
+        try {
+            WeatherCodeDto weatherCodeDto = WeatherService.getWeather();
+            response.setCode(StatusCode.OK);
+            response.setMessage("날씨 API 호출 성공");
+            response.setData(weatherCodeDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 }
