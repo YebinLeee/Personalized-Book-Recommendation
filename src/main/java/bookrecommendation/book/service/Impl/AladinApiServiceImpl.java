@@ -10,25 +10,27 @@ import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static bookrecommendation.book.domain.Feeling.*;
 import static bookrecommendation.book.openapi.constant.ApiUrlConstant.AlADIN_ITEM_LIST_API_URL;
 
-
 @Component
+@Primary
 public class AladinApiServiceImpl implements AladinApiService {
-
     private final AladinBookResultService aladinBookResultService;
 
     @Autowired
     public AladinApiServiceImpl(AladinBookResultService aladinBookResultService) {
         this.aladinBookResultService = aladinBookResultService;
     }
-
 
     @Override
     public List<BookDto> searchByInterest(String interestValue) {
@@ -79,18 +81,23 @@ public class AladinApiServiceImpl implements AladinApiService {
     }
 
     @Override
-    public List<BookDto> searchByFeeling(String feelingValue) {
+    public List<BookDto> searchByFeeling(List<String> feelings) {
         AladinQueryParams params = new AladinQueryParams();
         AladinParamSetter paramSetter = new AladinParamSetter();
-
-        Feeling feeling = Feeling.valueOfString(feelingValue);
-
-        params.setCategoryId(switch (Objects.requireNonNull(feeling)) {
-            case SADNESS, FEAR, DEPRESSED, ANGER, ANXIETY, REGRET -> 51375;
-            default -> 50940;
-        });
+        List<Feeling> negativeFeelings = new ArrayList<>(Arrays.asList(SADNESS, FEAR, DEPRESSED, ANGER, ANXIETY, REGRET));
 
         paramSetter.setRequestUrl(AlADIN_ITEM_LIST_API_URL);
+        params.setCategoryId(50940);
+
+        for (String feelingValue : feelings) {
+            Feeling feeling = Feeling.valueOfString(feelingValue);
+            for (Feeling negativeFeeling: negativeFeelings) {
+                if (feeling.equals(negativeFeeling)) {
+                    params.setCategoryId(51375);
+                    break;
+                }
+            }
+        }
 
         String requestUrl = paramSetter.setParams(params);
         Connection connection = Jsoup.connect(requestUrl);
@@ -103,6 +110,5 @@ public class AladinApiServiceImpl implements AladinApiService {
         }
 
         return aladinBookResultService.getResult(new JSONObject(response));
-
     }
 }

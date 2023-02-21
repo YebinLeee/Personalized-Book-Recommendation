@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface AladinApiService {
     List<BookDto> searchByInterest(String interestValue);
-    List<BookDto> searchByFeeling(String feelingValue);
+    List<BookDto> searchByFeeling(List<String> feelings);
 }

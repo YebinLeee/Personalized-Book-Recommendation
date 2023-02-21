@@ -41,7 +41,7 @@ public class MemberRestController {
 
         if(memberFind.isPresent()){
             response.setCode(StatusCode.OK);
-            response.setMessage(ResponseMessage.LOGIN_SUCCESSFUL);
+            response.setMessage(ResponseMessage.LOGIN_SUCCESS);
             response.setData(setResponseDto(memberFind.get()));
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -65,7 +65,7 @@ public class MemberRestController {
 
         if(memberFind.isPresent()){
             response.setCode(StatusCode.OK);
-            response.setMessage(ResponseMessage.LOGIN_SUCCESSFUL);
+            response.setMessage(ResponseMessage.LOGIN_SUCCESS);
             response.setData(setResponseDto(memberFind.get()));
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

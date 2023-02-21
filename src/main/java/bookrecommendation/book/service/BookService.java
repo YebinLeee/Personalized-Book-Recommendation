@@ -10,5 +10,5 @@ import java.util.List;
 public interface BookService {
     List<BookDto> searchByInterest(String interest);
     List<BookDto> searchByAgeAndGender(int age, Gender gender);
-    List<BookDto> searchByFeeling(String feeling);
+    List<BookDto> searchByFeeling(List<String> feelings);
 }

@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -40,11 +42,12 @@ class BookServiceImplTest {
 
     @Test
     void searchBooksByFeeling(){
-        String feeling = "분노";
+        ArrayList<String> feelings = new ArrayList<>(Arrays.asList("기쁨", "분노", "도전적임"));
 
-        List<BookDto> results = bookService.searchByFeeling(feeling);
+        List<BookDto> results = bookService.searchByFeeling(feelings);
         for (BookDto result : results) {
             System.out.println("result = " + result.getTitle());
+            System.out.println("result = " + result.getCategoryName());
         }
     }
 }
