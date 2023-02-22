@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @RestController
@@ -81,12 +83,10 @@ public class MemberRestController {
      */
     private MemberFoundResponseDto setResponseDto(Member member){
         MemberFoundResponseDto responseDto = new MemberFoundResponseDto();
-
         responseDto.setId(String.valueOf(member.getId()));
         responseDto.setGender(member.getGender());
         responseDto.setName(member.getName());
-        responseDto.setAge(member.getAge());
-
+        responseDto.setAge((int) ChronoUnit.YEARS.between(member.getBirth(), LocalDate.now()));
         return responseDto;
     }
 }

@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> searchByFeeling(String feeling) {
-        return aladinApiService.searchByFeeling(feeling);
+    public List<BookDto> searchByFeeling(List<String> feelings) {
+        return aladinApiService.searchByFeeling(feelings);
     }
 }

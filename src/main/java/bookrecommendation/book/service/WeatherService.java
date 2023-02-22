@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 import static bookrecommendation.book.openapi.constant.ApiUrlConstant.OPEN_DATA_WEATHER_API_URL;
+import static bookrecommendation.book.openapi.constant.WeatherCodeConstant.*;
 
 @Service
 public class WeatherService {
@@ -38,14 +39,14 @@ public class WeatherService {
         }
 
         switch(skyResult){
-            case "3","4"-> weatherCodeDto.setCode("1");
-            default -> weatherCodeDto.setCode("0");
+            case "3","4"-> weatherCodeDto.setCode(CLOUDY);
+            default -> weatherCodeDto.setCode(CLEAR);
         }
 
         switch (ptyResult){
-            case "1", "4" -> weatherCodeDto.setCode("2");
-            case "2","3" -> weatherCodeDto.setCode("3");
-            default -> weatherCodeDto.setCode("0");
+            case "1", "4" -> weatherCodeDto.setCode(RAINY);
+            case "2","3" -> weatherCodeDto.setCode(SNOWY);
+            default -> weatherCodeDto.setCode(CLEAR);
         }
         return weatherCodeDto;
     }

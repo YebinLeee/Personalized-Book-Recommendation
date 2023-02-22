@@ -4,29 +4,29 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
+@Table(name = "member_tbl")
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
+    @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "RFID_NUMBER")
+    @Column(name = "birth", nullable = false)
+    private LocalDate birth;
+
+    @Column(name = "rfid_serial_number")
     private String rfid;
 
-    @Column(name = "BARCODE_NUMBER")
+    @Column(name = "barcode_number")
     private String barcode;
-
-    @Column(name = "password", nullable = false)
-    private String password;
 
     @Column(name = "username", nullable = false)
     private String name;
-
-    @Column(name = "age", nullable = false)
-    private int age;
 
     @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)

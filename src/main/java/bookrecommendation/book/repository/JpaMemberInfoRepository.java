@@ -2,10 +2,12 @@ package bookrecommendation.book.repository;
 
 import bookrecommendation.book.domain.MemberInfo;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class JpaMemberInfoRepository implements MemberInfoRepository {
     private final EntityManager em;
 

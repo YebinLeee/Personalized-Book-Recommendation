@@ -3,40 +3,34 @@ package bookrecommendation.book.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "member_info_tbl")
 public class MemberInfo{
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_info_id")
     private Long id;
 
-    @Column(name = "username")
-    private String name;
+    @Column(name = "feeling1_code")
+    private String feelingCode1;
 
-    @Column(name = "age")
-    private int age;
+    @Column(name = "feeling2_code")
+    private String feelingCode2;
 
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "feeling3_code")
+    private String feelingCode3;
 
-    @Column(name = "interest")
+    @Column(name = "interest_code")
     private String interest;
 
-    @Column(name = "feeling")
-    private String feeling;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    public MemberInfo(){
-        this.createdDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-    }
-
+    @OneToOne
+    @JoinColumn(name = "result_id")
+    private RecommendResult result;
 }
