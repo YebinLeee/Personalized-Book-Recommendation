@@ -15,6 +15,75 @@
 
 <br>
 
+## API
+
+### 날씨 요청 API
+- URL : `/weather`
+- Method : `GET`
+
+
+<table>
+    <tr>
+        <th>구분</th>
+        <th width="400">정보</th>
+        <th>형식</th>
+        <th width="400">기본값</th>
+        <th>타입</th>
+        <th width="400">필요 여부</th>
+        <th>예시 (실패)</th>
+        <th>예시</td>
+    </tr>
+    <tr>
+        <td>Response</td>
+        <td>현재 날씨 정보</td>
+        <td>weather_code</td>
+        <td>0</td>
+        <td>Number</td>
+        <td>필수</td>
+<td>  
+
+```js
+  {
+    code : 400,
+    message : "날씨 API 호출 실패",
+    data : null
+  }
+```
+        
+</td>
+<td>
+
+```js
+  {
+    code : 200,
+    message : "날씨 API 호출 성공",
+    data : {
+      weather_code : 0,
+    }
+  }
+```
+        
+</td>
+    </tr>
+    <tr>
+        <td>비고</td>
+<td colspan="7"> 
+        
+```
+날씨 API에 요청(위치 정보: 성동구 고정값(x:61, y:127)) - Front에서 주기적으로 호출하여 저장 후 갱신 (30분 또는 1시간)
+코드 value 정보
+0 맑음 (기본값)
+1 흐림
+2 비
+3 눈
+```
+</td>
+      
+</table>
+
+
+<br>
+
 ## Issues
 - 개발 중 이슈 및 과정 기록 (블로그)
 - 최근 순서로 상시 업데이트 
