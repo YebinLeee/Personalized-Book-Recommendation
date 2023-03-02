@@ -15,6 +15,47 @@
 
 <br>
 
+## System Architecture
+- Client-Server 구조
+- 자가대출반납기에 탑재되는 C# 기반 WPF로 개발되는 클라이언트와 HTTP 요청, 응답을 JSON 형태로 주고 받는 Spring Boot 기반의 Restful API를 개발
+- Spring MVC를 이용해 Thymeleaf 기반으로 Template View를 만들어 Client View 대체하여 로컬에서 테스트 후 `ResponseEntity` 를 이용해 Json 데이터를 전달하는 방향으로 리팩토링중
+
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222335926-24c8c9ad-e453-4b60-81a1-8ce8ff3f7736.png" width=750></p>
+
+## UML Diagram 
+
+### Overall Sequence Diagram for System Scenario 
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222337721-567f85a7-59a5-4102-ad44-c7c5e51c6d26.png" width=650></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222338364-ca9bf93f-7a9c-445f-9f94-abc9a4fe3cb5.png" width=650></p>
+
+### Class(Service) Diagram of Abstract Interface and Implementation 
+- `객체 지향 설계(OOP)`, `제어의 역전(IoC, Inversion of Control)`, `의존 관계 주입(DI, Dependency Injection)`을 기반으로 하여 추상화된 인터페이스를 기반으로 클래스를 구체화한 회원 서비스(MemberService), 책 추천 서비스(Recommendation Service), 책 추천 결과 서비스(Book Result Service) 간의 관계를 도식화
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222337139-4f677bc4-46a0-4532-ba98-05aab085b8a5.png" width=900></p>
+
+### Member Service
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222339275-b7f80752-093d-4932-b195-a0fa7c478a38.png" width=500></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222339397-48dcb7aa-c167-4562-b239-5480c20af5a3.png" width=500></p>
+- Controller level
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222338694-52e4b0d3-683b-4dd7-ac4c-98b2a038d7a4.png" width=500></p>
+
+### Weather Service
+
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222339073-d1f66410-e59d-4c88-8930-e2067079f026.png" width=300></p>
+
+
+### Book Recommendation Services
+
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222338976-18e50041-b53c-403b-b891-5ecc405d68c7.png" width=600></p>
+
+
+
+<br>
+
+### Scenario for Book Recommendation
+- 책 추천에 사용되는 API는 알라딘 도서 자료 Open API와 도서관 정보나루 빅데이터 Open API
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222338563-1ec8a035-a939-4a32-999d-ab7f84c7bc6f.png" width=450></p>
+
+
 ## API
 
 ### 날씨 요청 API
