@@ -21,7 +21,7 @@
 - Spring MVC를 이용해 Thymeleaf 기반으로 Template View를 만들어 Client View 대체하여 로컬에서 테스트 후 `ResponseEntity` 를 이용해 Json 데이터를 전달하는 방향으로 리팩토링중
 
 <p align="center"><img src="https://user-images.githubusercontent.com/71310074/222335926-24c8c9ad-e453-4b60-81a1-8ce8ff3f7736.png" width=750></p>
-
+<p align="center"><img src="https://user-images.githubusercontent.com/71310074/222373239-01046203-1e5f-4b67-a71c-002fc1e9dfb6.png" width=550></p>
 ## UML Diagram 
 
 ### Overall Sequence Diagram for System Scenario 
